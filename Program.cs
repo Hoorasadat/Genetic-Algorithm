@@ -43,52 +43,15 @@ namespace GeneticAlgorithm
             }
             Console.WriteLine();
 
-            Population pop = new Population(noOfJobs,sizeOfPopulation);
+            Population pop = new Population(myProblem,sizeOfPopulation);
+            pop.CreateRandomSequences(myProblem);
 
-
-            int [] sequence = Enumerable.Range(1, myProblem.NoOfJobs).ToArray();
-            Schedule mySchedul = new Schedule(myProblem, sequence);
-            Console.WriteLine("Jobs Sequence: " + string.Join("-", mySchedul.Sequence));
-            Console.WriteLine("Total Processing Times " + mySchedul.Makespan);
         }
 
     }
-    class Population
-    {
-        public int NoOfJobs { get; set; }
-        public int SizeOfPopulation { get; set; }
-        public int[][]? ArrayOfSequences { get; set; }
-        public Population(int noOfJobs, int sizeOfPopulation)
-        {
-            NoOfJobs = noOfJobs;
-            SizeOfPopulation = sizeOfPopulation;
-            ArrayOfSequences = new int [sizeOfPopulation][];
-
-            int [] baseSequence = Enumerable.Range(1, NoOfJobs).ToArray();
-
-            // Console.WriteLine("Print all the randomly generated sequences in the population");
-            for (var i = 0; i < SizeOfPopulation; i++)
-            {
-                var rnd = new Random();
-                int [] sequence = baseSequence.OrderBy(x => rnd.Next()).ToArray();
-                // Console.WriteLine(string.Join("-", sequence));
-                // Console.WriteLine();
-                ArrayOfSequences[i] = sequence;
-            }
 
 
-        }
-    }
 
-    // class Crossover
-    // {
-    //     public int[] Sequence { get; set; }
-    //     public Crossover(int[] sequence)
-    //     {
-    //         Sequence = sequence;
-    //     }
-
-    // }
     class Problem
     {
         public int NoOfMachines { get; set; }
@@ -102,28 +65,40 @@ namespace GeneticAlgorithm
             NoOfJobs = noOfJobs;
             LowerBoundProcessingTimes = lowerBoundProcessingTimes;
             UpperBoundProcessingTimes = upperBoundProcessingTimes;
-            int[,] processingTimesArray = new int[noOfJobs, noOfMachines];
+            ProcessingTimesArray = GeneratePTArray();
+        }
+
+        private int[,] GeneratePTArray()
+        {
+            int[,] processingTimesArray = new int[NoOfJobs, NoOfMachines];
             for (var i = 0; i < NoOfJobs; i++)
             {
                 for (var j = 0; j < NoOfMachines; j++)
-            {
-                Random rnd = new Random();
-                processingTimesArray[i,j] = rnd.Next(LowerBoundProcessingTimes, UpperBoundProcessingTimes + 1);
+                {
+                    Random rnd = new Random();
+                    processingTimesArray[i,j] = rnd.Next(LowerBoundProcessingTimes, UpperBoundProcessingTimes + 1);
+                }
             }
-            }
-            ProcessingTimesArray = processingTimesArray;
+            return processingTimesArray;
         }
     }
+
+
+
     class Schedule
     {
         public int[] Sequence { get; set; }
-        public int Makespan { get; set; }
-        public Schedule(Problem problem, int [] sequence)
+        public Problem Prblm { get; set; }
+        public Schedule(Problem prblm, int[] sequence)
         {
             Sequence = sequence;
-            int noOfMachines = problem.NoOfMachines;
-            int noOfJobs = problem.NoOfJobs;
-            int[,] processingTimesArray = problem.ProcessingTimesArray;
+            Prblm = prblm;
+        }
+        public int CalculateMakespan(Problem Prblm)
+        {
+            int noOfMachines = Prblm.NoOfMachines;
+            int noOfJobs = Prblm.NoOfJobs;
+            int[,] processingTimesArray = Prblm.ProcessingTimesArray;
             int[,] completionTimeArray = new int[noOfJobs, noOfMachines];
 
             // 1-- Calculating the completion times of first job on all machines
@@ -159,8 +134,8 @@ namespace GeneticAlgorithm
                 }
             }
             int lastJobInSequence = Sequence[noOfJobs - 1];
-            Makespan = completionTimeArray[lastJobInSequence - 1 , noOfMachines - 1];
 
+            // ****************  Print the completion times for each job on each machine  ****************
             // for (int i = 0; i < completionTimeArray.GetLength(0); i++)
             // {
             //     Console.WriteLine();
@@ -171,6 +146,66 @@ namespace GeneticAlgorithm
             //     }
             //     Console.WriteLine();
             // }
+
+            return completionTimeArray[lastJobInSequence - 1 , noOfMachines - 1];
         }
     }
+
+
+
+        class Population
+    {
+        public static Problem? Problem { get; set; }
+        public static int SizeOfPopulation { get; set; }
+        public Population(Problem problem, int sizeOfPopulation)
+        {
+            Problem = problem;
+            SizeOfPopulation = sizeOfPopulation;
+        }
+
+        public struct ArrayOfPopulation
+        {
+            public int[][] ArrayOfSequences;
+            public int[] ArrayOfMakespans;
+        }
+        public ArrayOfPopulation CreateRandomSequences(Problem Problem)
+        {
+            int noOfJobs = Problem.NoOfJobs;
+            int [] baseSequence = Enumerable.Range(1, noOfJobs).ToArray();
+            Schedule baseSchedul = new Schedule(Problem, baseSequence);
+
+            Console.WriteLine("Primary Jobs Sequence: " + string.Join("-", baseSchedul.Sequence));
+            Console.WriteLine("Primary Total Processing Times(Makespan) " + baseSchedul.CalculateMakespan(Problem));
+
+            ArrayOfPopulation arrayOfPopulation = new ArrayOfPopulation();
+            arrayOfPopulation.ArrayOfSequences = new int [SizeOfPopulation][];
+            arrayOfPopulation.ArrayOfMakespans = new int [SizeOfPopulation];
+
+            // Console.WriteLine("Randomly generate and print all the sequences in the population");
+            for (var i = 0; i < SizeOfPopulation; i++)
+            {
+                var rnd = new Random();
+                int [] sequence = baseSequence.OrderBy(x => rnd.Next()).ToArray();
+                Schedule schedul = new Schedule(Problem, sequence);
+
+                Console.WriteLine("Jobs Sequence: " + string.Join("-", schedul.Sequence));
+                Console.WriteLine("Total Processing Times(Makespan) " + schedul.CalculateMakespan(Problem));
+                Console.WriteLine();
+
+                arrayOfPopulation.ArrayOfSequences[i] = sequence;
+                arrayOfPopulation.ArrayOfMakespans[i] = schedul.CalculateMakespan(Problem);
+            }
+            return arrayOfPopulation;
+        }
+    }
+
+    // class Crossover
+    // {
+    //     public int[] Sequence { get; set; }
+    //     public Crossover(int[] sequence)
+    //     {
+    //         Sequence = sequence;
+    //     }
+
+    // }
 }
