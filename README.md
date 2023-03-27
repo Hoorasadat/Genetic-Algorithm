@@ -1,19 +1,19 @@
-Getting Started with dotnet new console -o:
+# Getting Started with dotnet new console -o:
 
 This project was created using dotnet new console -o.
 
-Available Scripts
+## Available Scripts
 
 In the project directory, you can run:
 
-dotnet run
+### `dotnet run`
 
 Runs the app in the development mode.
 
 The page will run till the end and when you make changes, you need to rerun the app.
 You may also see any lint errors in the console.
 
-About the App:
+# About the App:
 One of the scheduling problems with various applications in industries is flow shop. In flow
 shop, a series of n jobs are processed at a series of g workshops with single machine in each workshop. To simplify the model construction, in most researches on flow shop scheduling problems, the setup times of operations have been ignored, combined with their corresponding processing times, or considered non sequence-dependent.
 
