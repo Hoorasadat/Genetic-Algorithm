@@ -1,10 +1,13 @@
-Getting Started with dotnet new console -o
+Getting Started with dotnet new console -o:
+
 This project was created using dotnet new console -o.
 
 Available Scripts
+
 In the project directory, you can run:
 
 dotnet run
+
 Runs the app in the development mode.
 
 The page will run till the end and when you make changes, you need to rerun the app.
