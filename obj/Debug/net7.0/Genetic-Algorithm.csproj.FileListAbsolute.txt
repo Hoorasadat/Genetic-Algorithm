@@ -1,0 +1,15 @@
+/Users/hoora/Desktop/zeroTomastery/c#/Genetic-Algorithm/bin/Debug/net7.0/Genetic-Algorithm
+/Users/hoora/Desktop/zeroTomastery/c#/Genetic-Algorithm/bin/Debug/net7.0/Genetic-Algorithm.deps.json
+/Users/hoora/Desktop/zeroTomastery/c#/Genetic-Algorithm/bin/Debug/net7.0/Genetic-Algorithm.runtimeconfig.json
+/Users/hoora/Desktop/zeroTomastery/c#/Genetic-Algorithm/bin/Debug/net7.0/Genetic-Algorithm.dll
+/Users/hoora/Desktop/zeroTomastery/c#/Genetic-Algorithm/bin/Debug/net7.0/Genetic-Algorithm.pdb
+/Users/hoora/Desktop/zeroTomastery/c#/Genetic-Algorithm/obj/Debug/net7.0/Genetic-Algorithm.csproj.AssemblyReference.cache
+/Users/hoora/Desktop/zeroTomastery/c#/Genetic-Algorithm/obj/Debug/net7.0/Genetic-Algorithm.GeneratedMSBuildEditorConfig.editorconfig
+/Users/hoora/Desktop/zeroTomastery/c#/Genetic-Algorithm/obj/Debug/net7.0/Genetic-Algorithm.AssemblyInfoInputs.cache
+/Users/hoora/Desktop/zeroTomastery/c#/Genetic-Algorithm/obj/Debug/net7.0/Genetic-Algorithm.AssemblyInfo.cs
+/Users/hoora/Desktop/zeroTomastery/c#/Genetic-Algorithm/obj/Debug/net7.0/Genetic-Algorithm.csproj.CoreCompileInputs.cache
+/Users/hoora/Desktop/zeroTomastery/c#/Genetic-Algorithm/obj/Debug/net7.0/Genetic-Algorithm.dll
+/Users/hoora/Desktop/zeroTomastery/c#/Genetic-Algorithm/obj/Debug/net7.0/refint/Genetic-Algorithm.dll
+/Users/hoora/Desktop/zeroTomastery/c#/Genetic-Algorithm/obj/Debug/net7.0/Genetic-Algorithm.pdb
+/Users/hoora/Desktop/zeroTomastery/c#/Genetic-Algorithm/obj/Debug/net7.0/Genetic-Algorithm.genruntimeconfig.cache
+/Users/hoora/Desktop/zeroTomastery/c#/Genetic-Algorithm/obj/Debug/net7.0/ref/Genetic-Algorithm.dll
