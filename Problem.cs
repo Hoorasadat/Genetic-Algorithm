@@ -2,7 +2,6 @@
 // Console.WriteLine("Hello, World!");
 
 using System;
-using System.Linq;
 
 namespace GeneticAlgorithm
 {

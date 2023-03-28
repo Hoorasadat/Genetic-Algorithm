@@ -2,14 +2,13 @@
 // Console.WriteLine("Hello, World!");
 
 using System;
-using System.Linq;
 
 namespace GeneticAlgorithm
 {
     class Schedule
     {
-        public int[] Sequence { get; set; }
         public Problem Prblm { get; set; }
+        public int[] Sequence { get; set; }
         public Schedule(Problem prblm, int[] sequence)
         {
             Sequence = sequence;
